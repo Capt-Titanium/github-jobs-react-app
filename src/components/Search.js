@@ -30,46 +30,63 @@ const Search = () => {
     <div className="search-section">
       <Form className="search-form" onSubmit={handleSearch}>
         <Row>
-          <Col>
+          <Col md={{ span: 3, offset: 3 }}>
             <Form.Group controlId="description">
               <Form.Control
+                className="search-box"
                 type="text"
                 name="description"
                 value={state.description || ""}
-                placeholder="Enter search term"
+                placeholder="Position you are applying for"
                 onChange={handleInputChange}
               />
             </Form.Group>
           </Col>
-          <Col>
+          <Col md={{ span: 3 }}>
             <Form.Group controlId="location">
               <Form.Control
+                className="search-box"
                 type="text"
                 name="location"
                 value={state.location || ""}
-                placeholder="Enter location"
+                placeholder="Location of your choice"
                 onChange={handleInputChange}
               />
             </Form.Group>
           </Col>
-          <Col>
-            <Button variant="primary" type="submit" className="btn-search">
+        </Row>
+        <Row className="checkbox-option justify-content-md-center">
+          <Col xs lg="2"></Col>
+          <Col md="auto">
+            <div className="filters">
+              <Form.Group controlId="full_time">
+                <Form.Check
+                  type="checkbox"
+                  name="full_time"
+                  className="full-time-checkbox"
+                  label="Full time only"
+                  checked={state.full_time}
+                  onChange={handleInputChange}
+                />
+              </Form.Group>
+            </div>
+          </Col>
+          <Col xs lg="2"></Col>
+        </Row>
+        <Row className="justify-content-md-center">
+          <Col xs lg="2"></Col>
+          <Col md="auto">
+            <Button
+              variant="primary"
+              size="lg"
+              type="submit"
+              className="btn-search"
+            >
               Search
             </Button>
           </Col>
+          <Col xs lg="2"></Col>
         </Row>
-        <div className="filters">
-          <Form.Group controlId="full_time">
-            <Form.Check
-              type="checkbox"
-              name="full_time"
-              className="full-time-checkbox"
-              label="Full time only"
-              checked={state.full_time}
-              onChange={handleInputChange}
-            />
-          </Form.Group>
-        </div>
       </Form>
     </div>
   );

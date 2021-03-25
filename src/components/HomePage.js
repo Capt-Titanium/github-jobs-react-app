@@ -9,6 +9,8 @@ import Results from "./Results";
 import JobDetails from "./JobDetails";
 import JobsContext from "../context/jobs";
 import Loader from "./Loader";
+import { Button, Col, Row } from "react-bootstrap";
+import load from "../images/load.gif";
 
 const HomePage = (props) => {
   const [results, setResults] = useState([]);
@@ -87,15 +89,23 @@ const HomePage = (props) => {
 
   return (
     <JobsContext.Provider value={value}>
-      <Loader show={isLoading}>Loading...</Loader>
+      <Loader show={isLoading}>
+        <Row>
+          <Col>
+            <img className="loading-gif" src={load} alt="" />
+          </Col>
+        </Row>
+      </Loader>
       <div className={`${page === "details" && "hide"}`}>
-        <Header /> <Search onSearch={handleSearch} />
+        <div className="heading-section">
+          <Header /> <Search onSearch={handleSearch} />
+        </div>
         {!_.isEmpty(errors) && (
           <div className="errorMsg">
             <p>{errors.error}</p>
           </div>
         )}
-        <div>
+        <div className="results-section">
           <Results results={results} onItemClick={handleItemClick} />
         </div>
         {results.length > 0 && _.isEmpty(errors) && !hideLoadMore && (
@@ -103,12 +113,14 @@ const HomePage = (props) => {
             className="load-more"
             onClick={isLoading ? null : handleLoadMore}
           >
-            <button
+            <Button
               disabled={isLoading}
               className={`${isLoading ? "disabled" : ""}`}
+              variant="outline-info"
+              size="lg"
             >
               Load More Jobs
-            </button>
+            </Button>
           </div>
         )}
       </div>
